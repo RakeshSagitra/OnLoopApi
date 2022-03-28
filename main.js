@@ -1,4 +1,4 @@
-const server = require('./server')
+import { start } from './server'
 
 process.on('uncaughtException ',(error) => {
   console.log(error)
@@ -8,4 +8,5 @@ process.on('unhandledRejection', (error) => {
   console.log(error)
 })
 
-server.start()
+start()
+console.log('Server Main')

@@ -1,9 +1,10 @@
-const convict = require('convict')
-const { resolve } = require('path')
+import convict from 'convict'
+import { resolve } from 'path'
+import dotenv from 'dotenv'
 
-require('dotenv').config({ path: resolve(__dirname, '../.env') })
+dotenv.config({ path: resolve(__dirname, '../.env') })
 
-const appConfig = convict({
+export const appConfig = convict({
   app: {
     name: {
       doc: 'OnLoop',
@@ -26,5 +27,3 @@ const appConfig = convict({
 })
 
 appConfig.validate({ allowed: 'strict' })
-
-module.exports = { appConfig }

@@ -1,5 +1,5 @@
-const { appConfig } =  require('../config/appConfig')
-const app = require('./express')
+import { appConfig } from '../config/appConfig'
+import  app from './express'
 
 const start = async () => {
   const PORT = appConfig.get('port')
@@ -8,4 +8,4 @@ const start = async () => {
   })
 }
 
-module.exports = { start }
+export { start }
