@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/express.js"
+    "start": "node main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "convict": "^6.2.2",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3"
   }
 }
