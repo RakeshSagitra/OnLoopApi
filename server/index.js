@@ -1,5 +1,5 @@
 import { appConfig } from '../config/appConfig'
-import  app from './express'
+import app from './express'
 
 const start = async () => {
   const PORT = appConfig.get('port')

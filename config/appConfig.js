@@ -24,6 +24,34 @@ export const appConfig = convict({
     default: 4000,
     env: 'PORT'
   },
+  log_level: {
+    doc: 'level of logs to show',
+    format: String,
+    default: 'debug',
+    env: 'LOG_LEVEL'
+  },
+  logConfig: {
+    maxSize: {
+      default: '50m',
+      env: 'WINSTON_LOG_MAX_SIZE'
+    },
+    maxFiles: {
+      default: '10d',
+      env: 'WINSTON_MAX_FILES_DURATION'
+    },
+    dirname: {
+      default: 'logs',
+      env: 'WINSTON_LOG_DIR'
+    },
+    datePattern: {
+      default: 'YYYY-MM-DD-HH',
+      env: 'WINSTON_FILE_NAME_DATE_PATTERN'
+    },
+    zippedArchive: {
+      default: true,
+      env: 'WINSTON_ZIPPED_ARCHIVE'
+    }
+  }
 })
 
 appConfig.validate({ allowed: 'strict' })
