@@ -1,0 +1,31 @@
+{
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.minimap.enabled": false,
+  "editor.renderControlCharacters": false,
+  "editor.renderFinalNewline": true,
+  "editor.rulers": [120],
+  "editor.multiCursorModifier": "alt",
+  "editor.autoIndent": "full",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "javascript.format.insertSpaceAfterConstructor": true,
+  "breadcrumbs.enabled": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+"eslint.alwaysShowStatus": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.lintTask.enable": true,
+  "eslint.workingDirectories": [
+    "./",
+  ],
+}
