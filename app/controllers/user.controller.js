@@ -1,5 +1,5 @@
 import Responder from '../../server/expressResponder'
-import { CreateUserService, GetUserService, GetUsersService, UpdateUserService } from '../services/user'
+import { CreateUserService, DeleteUserService, GetUserService, GetUsersService, UpdateUserService } from '../services/user'
 
 export default class UserController {
   static async createUser (req, res) {
@@ -39,6 +39,16 @@ export default class UserController {
       Responder.success(res, updateUserResult.result)
     } else {
       Responder.failed(res, updateUserResult.errors)
+    }
+  }
+
+  static async deleteUser (req, res) {
+    const deleteUserResult = await DeleteUserService.execute(req.params)
+
+    if (deleteUserResult.successful) {
+      Responder.success(res, deleteUserResult.result)
+    } else {
+      Responder.failed(res, deleteUserResult.errors)
     }
   }
 }

@@ -12,4 +12,6 @@ usersRouter.route('/:id').get(UserController.getUser)
 
 usersRouter.route('/:id').patch(UserController.updateUser)
 
+usersRouter.route('/:id').delete(UserController.deleteUser)
+
 export { usersRouter }
