@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getDoc, doc } from 'firebase/firestore'
+import { addDoc, collection, getDocs, getDoc, doc, updateDoc } from 'firebase/firestore'
 import { firebaseDb } from './firebase'
 
 export const addUser = async ({
@@ -30,4 +30,16 @@ export const getUserById = async ({ id }) => {
       ...userData.data()
     }
   } return null
+}
+
+export const updateUserById = async ({
+  id, name, email, phone
+}) => {
+  let updatingFields = {}
+  if (name) { updatingFields = { ...updatingFields, name } }
+  if (email) { updatingFields = { ...updatingFields, email } }
+  if (phone) { updatingFields = { ...updatingFields, phone } }
+
+  const userData = await updateDoc(doc(firebaseDb, 'users', id), updatingFields)
+  return userData
 }
