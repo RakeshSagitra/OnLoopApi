@@ -1,5 +1,6 @@
 import ServiceBase from '../../common/serviceBase'
 import { ERRORS } from '../../utils/errors'
+import { addUser } from '../../helper/user'
 
 const constraints = {
   name: {
@@ -21,14 +22,15 @@ export class CreateUserService extends ServiceBase {
   async run () {
     try {
       const { name, email, phone } = this.filteredArgs
+      const userRef = await addUser({ name, email, phone })
 
-      // Upload User Data to Firestore
-      console.log(this.filteredArgs)
       return {
-        data: 'okay'
+        userRefId: userRef.id,
+        message: 'User created Successfully'
       }
     } catch (e) {
-      this.addError(ERRORS.INTERNAL)
+      console.error('Error adding user: ', e)
+      return this.addError(ERRORS.INTERNAL)
     }
   }
 }

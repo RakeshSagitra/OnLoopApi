@@ -51,6 +51,36 @@ export const appConfig = convict({
       default: true,
       env: 'WINSTON_ZIPPED_ARCHIVE'
     }
+  },
+  firebase: {
+    apiKey: {
+      default: '',
+      env: 'FIREBASE_API_KEY'
+    },
+    authDomain: {
+      default: '',
+      env: 'FIREBASE_AUTH_DOMAIN'
+    },
+    projectId: {
+      default: '',
+      env: 'FIREBASE_PROJECT_ID'
+    },
+    storageBucket: {
+      default: '',
+      env: 'FIREBASE_STORAGE_BUCKET'
+    },
+    messagingSenderId: {
+      default: '',
+      env: 'FIREBASE_MESSAGING_SENDER_ID'
+    },
+    appId: {
+      default: '',
+      env: 'FIREBASE_APP_ID'
+    },
+    measurementId: {
+      default: '',
+      env: 'FIREBASE_MEASUREMENT_ID'
+    }
   }
 })
 
