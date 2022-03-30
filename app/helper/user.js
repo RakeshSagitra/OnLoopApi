@@ -98,3 +98,14 @@ export const deleteAllUsers = async () => {
     await deleteUserById({ id: user.id })
   })
 }
+
+export const getLearnContent = async ({
+  userId, learnContentId
+}) => {
+  const subdata = await getDoc(doc(firebaseDb, `users/${userId}/learn_content`, learnContentId))
+
+  if (subdata.exists()) {
+    return subdata.data()
+  }
+  return null
+}

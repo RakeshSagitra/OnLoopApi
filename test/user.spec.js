@@ -6,7 +6,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const { describe, it, before } = require('mocha')
 const should = require('should')
-const { deleteAllUsers } = require('../app/helper/user')
+const { deleteAllUsers, getLearnContent } = require('../app/helper/user')
 const { start } = require('../server')
 
 const test = async () => {
@@ -166,6 +166,86 @@ const test = async () => {
             should(res).have.property('status', 404)
             done()
           })
+      })
+    })
+  })
+
+  describe('User Learn Content', () => {
+    before(async () => {
+      await deleteAllUsers()
+    })
+
+    // Post New User
+    let newUserId
+    const newUser = {
+      name: 'Mark',
+      email: 'mark@yopmail.com',
+      phone: 8923239811
+    }
+
+    let learnContentId
+    let tags = []
+
+    const learnContent = {
+      url: 'https://www.twitter.com',
+      user_id: '',
+      tags: [
+        {
+          iso: 'honey',
+          piso: 'sunny'
+        },
+        {
+          triso: 'koney',
+          nino: 'funny'
+        }
+      ]
+    }
+
+    describe('/POST Create new user', () => {
+      it('it should create a new user', (done) => {
+        chai.request(server)
+          .post('/api/v1/users')
+          .send(newUser)
+          .end((err, res) => {
+            if (err) {
+              console.log(err.stack)
+            }
+            should(res).have.property('status', 200)
+            should(res.body).be.of.type('object').with.property('data').with.property('userRefId')
+            newUserId = res.body.data.userRefId
+            done()
+          })
+      })
+    })
+
+    describe('/POST User Learn Content', () => {
+      it('it should update the user with learn content', (done) => {
+        chai.request(server)
+          .post('/api/v1/users/learn-content')
+          .send({
+            ...learnContent,
+            user_id: newUserId
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err.stack)
+            }
+            should(res).have.property('status', 200)
+            should(res.body).be.of.type('object').with.property('data').with.property('learnContentDocId')
+            should(res.body).be.of.type('object').with.property('data').with.property('tags')
+
+            learnContentId = res.body.data.learnContentDocId
+            tags = res.body.data.tags
+            done()
+          })
+      })
+
+      it('it should verify user learn content on firestore', async () => {
+        const learnContent = await getLearnContent({
+          userId: newUserId,
+          learnContentId
+        })
+        should(learnContent).be.of.type('object').with.property('url').eqls(learnContent.url)
       })
     })
   })
