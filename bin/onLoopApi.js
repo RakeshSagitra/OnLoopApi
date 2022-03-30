@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
- require('@babel/register')({
+require('@babel/register')({
   extensions: ['.js', '.jsx', '.ts', '.tsx']
 })
 require('../main')

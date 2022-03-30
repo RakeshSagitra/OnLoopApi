@@ -1,6 +1,6 @@
 import { start } from './server'
 
-process.on('uncaughtException ',(error) => {
+process.on('uncaughtException ', (error) => {
   console.log(error)
 })
 

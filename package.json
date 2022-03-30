@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/nodemon --inspect=0.0.0.0:4500 ./bin/onLoopApi",
-    "test": "mocha --timeout 10000 --require @babel/polyfill --require @babel/register './test/**/*.spec.js'"
+    "test": "mocha --timeout 10000 --require @babel/polyfill --require @babel/register './test/**/*.spec.js'",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js ."
   },
   "author": "",
   "license": "ISC",
