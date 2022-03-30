@@ -1,12 +1,13 @@
 // During the test the env variable is set to test
 process.env.NODE_ENV = 'test'
 
+const { expect } = require('chai')
 // Require the dev-dependencies
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const { describe, it, before } = require('mocha')
 const should = require('should')
-const { deleteAllUsers, getLearnContent } = require('../app/helper/user')
+const { deleteAllUsers, getLearnContent, getLearnContentTags } = require('../app/helper/user')
 const { start } = require('../server')
 
 const test = async () => {
@@ -184,7 +185,6 @@ const test = async () => {
     }
 
     let learnContentId
-    let tags = []
 
     const learnContent = {
       url: 'https://www.twitter.com',
@@ -235,7 +235,6 @@ const test = async () => {
             should(res.body).be.of.type('object').with.property('data').with.property('tags')
 
             learnContentId = res.body.data.learnContentDocId
-            tags = res.body.data.tags
             done()
           })
       })
@@ -246,6 +245,14 @@ const test = async () => {
           learnContentId
         })
         should(learnContent).be.of.type('object').with.property('url').eqls(learnContent.url)
+      })
+
+      it('it should verify user learn content tags on firestore', async () => {
+        const learnContentTags = await getLearnContentTags({
+          userId: newUserId,
+          learnContentId
+        })
+        expect(learnContentTags).to.eql(learnContent.tags)
       })
     })
   })

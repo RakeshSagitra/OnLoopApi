@@ -109,3 +109,20 @@ export const getLearnContent = async ({
   }
   return null
 }
+
+export const getLearnContentTags = async ({
+  userId, learnContentId
+}) => {
+  const tagRefs = await getDocs(
+    collection(firebaseDb,
+      `users/${userId}/learn_content/${learnContentId}/tags`)
+  )
+
+  const allTags = []
+
+  tagRefs.forEach(tag => {
+    allTags.push(tag.data())
+  })
+
+  return allTags
+}
