@@ -91,3 +91,10 @@ export const userLearnContent = async ({ url, user_id, tags }) => {
 
   return true
 }
+
+export const deleteAllUsers = async () => {
+  const allUsers = await getAllUsers()
+  allUsers.forEach(async (user) => {
+    await deleteUserById({ id: user.id })
+  })
+}

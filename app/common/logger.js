@@ -30,7 +30,8 @@ let transports = [
     level: logLevel,
     handleExceptions: true,
     json: true,
-    colorize: true
+    colorize: true,
+    silent: environment === 'test'
   })
 ]
 
