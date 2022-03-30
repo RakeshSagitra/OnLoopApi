@@ -27,7 +27,7 @@ export class LearnContentService extends ServiceBase {
         url, user_id, tags
       })
 
-      return { data: 'okay' }
+      return learnContentResult
     } catch (e) {
       return this.addError(ERRORS.INTERNAL)
     }

@@ -57,9 +57,11 @@ export const userLearnContent = async ({ url, user_id, tags }) => {
   const linkPreviewResult = await getLinkPreviewResult({ url })
 
   try {
+    let result = {}
+    const tagDocs = []
     if (linkPreviewResult) {
       // Add learn_content doc to userDoc
-      const linkPreviewDoc = addDoc(
+      const learnContentDoc = await addDoc(
         collection(firebaseDb, `users/${user_id}/learn_content`),
         {
           ...linkPreviewResult,
@@ -67,10 +69,24 @@ export const userLearnContent = async ({ url, user_id, tags }) => {
           status: 'unread'
         }
       )
-      console.log((await linkPreviewDoc).id)
+
+      result = { ...result, learnContentDocId: learnContentDoc.id }
+
+      // Add tags docs to learn_content doc
+      for (const tag of tags) {
+        const tagDoc = await addDoc(
+          collection(firebaseDb, `users/${user_id}/learn_content/${learnContentDoc.id}/tags`),
+          tag
+        )
+        const tagDocId = await tagDoc.id
+        tagDocs.push({ id: tagDocId, tag })
+      }
+
+      result = { ...result, tags: tagDocs }
+      return result
     }
   } catch (e) {
-    console.log('ERROR==', e)
+    console.log('Error in userLearnContent', e)
   }
 
   return true
