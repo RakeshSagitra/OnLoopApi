@@ -14,4 +14,7 @@ usersRouter.route('/:id').patch(UserController.updateUser)
 
 usersRouter.route('/:id').delete(UserController.deleteUser)
 
+usersRouter.route('/learn-content').post(UserController.learnContent)
+
+
 export { usersRouter }

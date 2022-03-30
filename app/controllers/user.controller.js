@@ -1,5 +1,5 @@
 import Responder from '../../server/expressResponder'
-import { CreateUserService, DeleteUserService, GetUserService, GetUsersService, UpdateUserService } from '../services/user'
+import { CreateUserService, DeleteUserService, GetUserService, GetUsersService, LearnContentService, UpdateUserService } from '../services/user'
 
 export default class UserController {
   static async createUser (req, res) {
@@ -49,6 +49,16 @@ export default class UserController {
       Responder.success(res, deleteUserResult.result)
     } else {
       Responder.failed(res, deleteUserResult.errors)
+    }
+  }
+
+  static async learnContent (req, res) {
+    const learnContent = await LearnContentService.execute(req.body)
+
+    if (learnContent.successful) {
+      Responder.success(res, learnContent.result)
+    } else {
+      Responder.failed(res, learnContent.errors)
     }
   }
 }

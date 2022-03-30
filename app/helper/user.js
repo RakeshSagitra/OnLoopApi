@@ -1,5 +1,10 @@
-import { addDoc, collection, getDocs, getDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import {
+  addDoc, collection,
+  getDocs, getDoc, doc, updateDoc, deleteDoc,
+  serverTimestamp
+} from 'firebase/firestore'
 import { firebaseDb } from './firebase'
+import { getLinkPreviewResult } from './linkPreview'
 
 export const addUser = async ({
   name, email, phone
@@ -46,4 +51,27 @@ export const updateUserById = async ({
 
   const userData = await updateDoc(doc(firebaseDb, 'users', id), updatingFields)
   return userData
+}
+
+export const userLearnContent = async ({ url, user_id, tags }) => {
+  const linkPreviewResult = await getLinkPreviewResult({ url })
+
+  try {
+    if (linkPreviewResult) {
+      // Add learn_content doc to userDoc
+      const linkPreviewDoc = addDoc(
+        collection(firebaseDb, `users/${user_id}/learn_content`),
+        {
+          ...linkPreviewResult,
+          created_at: serverTimestamp(),
+          status: 'unread'
+        }
+      )
+      console.log((await linkPreviewDoc).id)
+    }
+  } catch (e) {
+    console.log('ERROR==', e)
+  }
+
+  return true
 }

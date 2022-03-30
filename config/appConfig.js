@@ -81,6 +81,16 @@ export const appConfig = convict({
       default: '',
       env: 'FIREBASE_MEASUREMENT_ID'
     }
+  },
+  linkPreview: {
+    apiKey: {
+      default: '',
+      env: 'LINK_PREVIEW_API_KEY'
+    },
+    apiUrl: {
+      default: 'https://api.linkpreview.net',
+      env: 'LINK_PREVIEW_API_URL'
+    }
   }
 })
 
