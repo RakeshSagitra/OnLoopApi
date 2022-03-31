@@ -9,11 +9,13 @@ const { describe, it, before } = require('mocha')
 const should = require('should')
 const { deleteAllUsers, getLearnContent, getLearnContentTags } = require('../app/helper/user')
 const { start } = require('../server')
+const deepEqualInAnyOrder = require('deep-equal-in-any-order')
 
 const test = async () => {
   // Empty Users collection before test
 
   const server = await start()
+  chai.use(deepEqualInAnyOrder)
   chai.use(chaiHttp)
 
   describe('Users', () => {
@@ -252,7 +254,7 @@ const test = async () => {
           userId: newUserId,
           learnContentId
         })
-        expect(learnContentTags).to.eql(learnContent.tags)
+        expect(learnContentTags).to.deep.equalInAnyOrder(learnContent.tags)
       })
     })
   })
