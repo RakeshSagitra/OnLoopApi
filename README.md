@@ -5,6 +5,8 @@
 - Added a custom API to fetch data from a LinkPreview API and store it in Users Schema.
 - Take an array of Tags in custom API and created data structure in Firestore DB for particular user.
 - Test all API's and test cases using Chai and Mocha frameworks.
+- Postman API Documentation -
+<https://documenter.getpostman.com/view/16237228/UVyq1y4b#be071820-03f3-444c-86e4-32a0d3dbf46f>
 
 ## Project Setup -
 ### Installation
