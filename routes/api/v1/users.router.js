@@ -10,7 +10,7 @@ usersRouter.route('/').get(UserController.getUsers)
 
 usersRouter.route('/:id').get(UserController.getUser)
 
-usersRouter.route('/:id').patch(UserController.updateUser)
+usersRouter.route('/:id').put(UserController.updateUser)
 
 usersRouter.route('/:id').delete(UserController.deleteUser)
 

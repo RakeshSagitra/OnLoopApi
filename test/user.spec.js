@@ -100,7 +100,7 @@ const test = async () => {
     describe('/PATCH Update new user', () => {
       it('it should update the user with help of id', (done) => {
         chai.request(server)
-          .patch(`/api/v1/users/${newUserId}`)
+          .put(`/api/v1/users/${newUserId}`)
           .send(updatedUser)
           .end((err, res) => {
             if (err) {
